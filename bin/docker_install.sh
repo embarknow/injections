@@ -10,5 +10,5 @@ apt-get update -yqq
 apt-get install git -yqq
 
 # Install phpunit, the tool that we will use for testing
-curl -o /usr/local/bin/phpunit https://phar.phpunit.de/phpunit.phar
+curl -oL /usr/local/bin/phpunit https://phar.phpunit.de/phpunit.phar
 chmod +x /usr/local/bin/phpunit
