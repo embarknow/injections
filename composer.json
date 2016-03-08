@@ -1,6 +1,6 @@
 {
-    "name": "embarknow/package",
-    "description": "",
+    "name": "embarknow/injections",
+    "description": "Injectior definition and configuration pattern.",
     "license": "MIT",
     "authors": [
         {
