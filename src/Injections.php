@@ -4,7 +4,7 @@ namespace EmbarkNow\Injections;
 
 use InvalidArgumentException;
 
-class Injections implements InjectorInterface, InjectorAwareInterface
+class Injections implements InjectionsInterface, InjectorAwareInterface
 {
     use InjectorAwareTrait;
     use ResolverAwareTrait;

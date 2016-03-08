@@ -2,7 +2,7 @@
 
 namespace EmbarkNow\Injections;
 
-interface InjectorInterface
+interface InjectionsInterface
 {
     /**
      * Set an array of injection definitions.
