@@ -18,13 +18,13 @@ class InjectionsTest extends \PHPUnit_Framework_TestCase
 
     public function testCreatesInstance()
     {
-        $this->createInjector();
+        $this->createInjections();
         $this->assertInstanceOf(Injections::class, $this->subject);
     }
 
     public function testSetsInjector()
     {
-        $this->createInjectorWithSpy();
+        $this->createInjectionsWithSpy();
         $injector = $this->getProperty('injector', $this->subject);
 
         $this->assertInstanceOf(InjectorSpy::class, $injector);
@@ -32,7 +32,7 @@ class InjectionsTest extends \PHPUnit_Framework_TestCase
 
     public function testSetsResolver()
     {
-        $this->createInjectorWithResolver();
+        $this->createInjectionsWithResolver();
         $resolver = $this->getProperty('resolver', $this->subject);
 
         $this->assertInstanceOf(ResolverStub::class, $resolver);
@@ -40,7 +40,7 @@ class InjectionsTest extends \PHPUnit_Framework_TestCase
 
     public function testSetsInjectionsArray()
     {
-        $this->createInjector();
+        $this->createInjections();
         $this->subject->setInjections([
             InjectionDummy::class,
         ]);
@@ -50,7 +50,7 @@ class InjectionsTest extends \PHPUnit_Framework_TestCase
 
     public function testAddsInjection()
     {
-        $this->createInjector();
+        $this->createInjections();
         $this->subject->addInjection(InjectionDummy::class);
 
         $this->assertInjectionsArrayIsNotEmptyOrNull();
@@ -60,7 +60,7 @@ class InjectionsTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException(InvalidArgumentException::class);
 
-        $this->createInjector();
+        $this->createInjections();
         $this->subject->addInjection(new StdClass());
     }
 
@@ -68,13 +68,13 @@ class InjectionsTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException(InvalidArgumentException::class);
 
-        $this->createInjector();
+        $this->createInjections();
         $this->subject->addInjection(StdClass::class);
     }
 
     public function testAddsUniqueInjectionsOnly()
     {
-        $this->createInjector();
+        $this->createInjections();
         $this->subject->addInjection(InjectionDummy::class);
         $this->subject->addInjection(InjectionDummy::class);
 
@@ -84,7 +84,7 @@ class InjectionsTest extends \PHPUnit_Framework_TestCase
 
     public function testLoopsQueueOfInjections()
     {
-        $this->createInjectorWithResolverAndSpy();
+        $this->createInjectionsWithResolverAndSpy();
         $this->subject->setInjections([
             InjectionStubOne::class,
             InjectionStubTwo::class,
@@ -96,7 +96,7 @@ class InjectionsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->spy->getCount(), 2);
     }
 
-    private function createInjector()
+    private function createInjections()
     {
         $this->subject = new Injections();
     }
@@ -106,22 +106,22 @@ class InjectionsTest extends \PHPUnit_Framework_TestCase
         $this->spy = new InjectorSpy();
     }
 
-    private function createInjectorWithResolver()
+    private function createInjectionsWithResolver()
     {
-        $this->createInjector();
+        $this->createInjections();
         $this->subject->setResolver(new ResolverStub());
     }
 
-    private function createInjectorWithSpy()
+    private function createInjectionsWithSpy()
     {
-        $this->createInjector();
+        $this->createInjections();
         $this->createSpy();
         $this->subject->setInjector($this->spy);
     }
 
-    private function createInjectorWithResolverAndSpy()
+    private function createInjectionsWithResolverAndSpy()
     {
-        $this->createInjectorWithSpy();
+        $this->createInjectionsWithSpy();
         $this->subject->setResolver(new ResolverStub($this->spy));
     }
 
