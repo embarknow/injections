@@ -45,6 +45,13 @@ class Injections implements InjectionsInterface, InjectorAwareInterface
             ));
         }
 
+        if (!class_exists($injection)) {
+            throw new InvalidArgumentException(sprintf(
+                "Injection classname string '%s' does not exist.",
+                $injection
+            ));
+        }
+
         if (!is_subclass_of($injection, InjectionInterface::class)) {
             throw new InvalidArgumentException(sprintf(
                 "Injection classname string '%s' does not implement '%s'",
