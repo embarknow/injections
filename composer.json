@@ -8,7 +8,6 @@
             "email": "john@embarknow.co.uk"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php": ">=5.6"
     },
