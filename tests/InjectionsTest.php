@@ -56,12 +56,12 @@ class InjectionsTest extends \PHPUnit_Framework_TestCase
         $this->assertInjectionsArrayIsNotEmptyOrNull();
     }
 
-    public function testThrowsExceptionOnAddingNonStringInjection()
+    public function testThrowsExceptionWhenClassNotExists()
     {
         $this->setExpectedException(InvalidArgumentException::class);
 
         $this->createInjections();
-        $this->subject->addInjection(new StdClass());
+        $this->subject->addInjection('Badgers');
     }
 
     public function testThrowsExceptionOnAddingInvalidInjection()
